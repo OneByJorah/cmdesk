@@ -373,17 +373,18 @@ COSTS_HTML = r"""
 </html>
 """
 
+
 def capture_screenshots():
     """Capture CommandDesk screenshots using HTML mockups.
-    
+
     Note: These are representative mockups, not screenshots from the running application.
     """
     os.makedirs(SCREENSHOT_DIR, exist_ok=True)
-    
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        
+
         # 1. Capture dashboard
         print("Capturing dashboard...")
         page.set_content(DASHBOARD_HTML)
@@ -392,7 +393,7 @@ def capture_screenshots():
         page.screenshot(path=f"{SCREENSHOT_DIR}/dashboard.png", full_page=False)
         size = os.path.getsize(f"{SCREENSHOT_DIR}/dashboard.png")
         print(f"  Saved: dashboard.png ({size:,} bytes)")
-        
+
         # 2. Capture AI assistant
         print("Capturing AI assistant...")
         page.set_content(AI_HTML)
@@ -401,7 +402,7 @@ def capture_screenshots():
         page.screenshot(path=f"{SCREENSHOT_DIR}/ai-assistant.png", full_page=False)
         size = os.path.getsize(f"{SCREENSHOT_DIR}/ai-assistant.png")
         print(f"  Saved: ai-assistant.png ({size:,} bytes)")
-        
+
         # 3. Capture costs
         print("Capturing costs...")
         page.set_content(COSTS_HTML)
@@ -410,10 +411,11 @@ def capture_screenshots():
         page.screenshot(path=f"{SCREENSHOT_DIR}/costs.png", full_page=False)
         size = os.path.getsize(f"{SCREENSHOT_DIR}/costs.png")
         print(f"  Saved: costs.png ({size:,} bytes)")
-        
+
         browser.close()
-    
+
     print(f"\nScreenshots saved to {SCREENSHOT_DIR}/")
+
 
 if __name__ == "__main__":
     capture_screenshots()
