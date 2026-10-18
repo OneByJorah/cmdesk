@@ -4,10 +4,10 @@ Instructions for AI coding agents (OpenCode, Freebuff/Codebuff, Hermes workers, 
 
 ## Project
 
-- **What it is:** replace with one sentence.
-- **Stack:** replace (language, framework, runtime).
-- **Run locally:** `cp .env.example .env && docker compose up -d --build`, then open `http://127.0.0.1:8080`.
-- **Health check:** `GET /healthz` must return 200.
+- **What it is:** Self-hosted AI helpdesk agent: ingests email, chat, WhatsApp, and tickets into one queue, answers from a local knowledge base with a local LLM, and tracks per-ticket AI cost.
+- **Stack:** Python 3.11, FastAPI, llama.cpp, ChromaDB, PostgreSQL, Redis, SearXNG, n8n, nginx, Docker Compose.
+- **Run locally:** `cp .env.example .env && docker compose up -d --build`, then open `http://127.0.0.1/dashboard/`.
+- **Health check:** `GET /healthz` must return 200 (nginx, agent API, and tools-ui all expose it).
 
 ## Commands
 
