@@ -23,4 +23,4 @@ description: Capture real, safe screenshots of a running project with Playwright
 
 ## Output
 
-`docs/screenshots/<name>.png` at 1440x900 @2x, dark color scheme, matching the J1 design language. Reference them in the README with alt text.
+`docs/screenshots/<name>.png` at 1440x900 @2x, dark color scheme, matching the cmdesk design language. Reference them in the README with alt text.

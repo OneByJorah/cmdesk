@@ -7,7 +7,7 @@
 set -euo pipefail
 
 echo "═══════════════════════════════════════════"
-echo "  J1 Helpdesk Agent - Setup"
+echo "  cmdesk Agent - Setup"
 echo "═══════════════════════════════════════════"
 
 # Check prerequisites
@@ -54,7 +54,7 @@ if [ -d knowledge-base ] && [ "$(ls -A knowledge-base/*.md knowledge-base/*.txt 
 else
     echo "[?] Adding sample knowledge base article..."
     cat > knowledge-base/welcome.md << 'EOF'
-# Welcome to J1 Helpdesk
+# Welcome to cmdesk
 
 ## How to get help
 

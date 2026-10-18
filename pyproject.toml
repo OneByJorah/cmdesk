@@ -3,13 +3,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "commanddesk"
+name = "cmdesk"
 version = "1.0.0"
 description = "Self-hosted help desk and IT ticketing system — multi-user, knowledge base, SLA tracking, and customer portal with Docker Compose deployment."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [{name = "OneByJorah", email = "info@jorahone.com"}]
-keywords = ["commanddesk", "docker", "self-hosted", "jorahone", "onebyjorah"]
+keywords = ["cmdesk", "docker", "self-hosted", "jorahone", "onebyjorah"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Web Environment",
@@ -32,9 +32,9 @@ dependencies = [
 dev = ["pytest", "black", "flake8"]
 
 [project.urls]
-Homepage = "https://github.com/OneByJorah/CommandDesk"
-Repository = "https://github.com/OneByJorah/CommandDesk"
-Issues = "https://github.com/OneByJorah/CommandDesk/issues"
+Homepage = "https://github.com/OneByJorah/cmdesk"
+Repository = "https://github.com/OneByJorah/cmdesk"
+Issues = "https://github.com/OneByJorah/cmdesk/issues"
 
 [tool.setuptools.packages.find]
-include = ["commanddesk*"]
+include = ["cmdesk*"]

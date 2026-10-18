@@ -1,6 +1,6 @@
 skills:
   - id: j1-helpdesk
-    name: J1 Helpdesk Agent
+    name: cmdesk Agent
     description: Self-hosted AI helpdesk with multi-platform ticketing, email-to-ticket, and a cost-tracking admin dashboard.
     version: 0.1.0
     entrypoints:

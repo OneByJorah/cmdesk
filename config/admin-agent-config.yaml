@@ -3,7 +3,7 @@
 # ═══════════════════════════════════════════════════
 
 agent:
-  name: "J1 Helpdesk Admin"
+  name: "cmdesk Admin"
   mode: admin
   port: 8082
   description: "Admin agent for helpdesk management - full access"
