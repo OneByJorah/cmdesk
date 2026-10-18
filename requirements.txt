@@ -10,7 +10,7 @@ httpx==0.28.1
 python-multipart==0.0.31
 
 # LLM / OpenAI-compatible client
-openai==1.59.0
+openai==1.59.9
 
 # Knowledge base
 chromadb==0.5.23

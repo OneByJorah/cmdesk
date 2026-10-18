@@ -417,7 +417,7 @@ async def receive_message(request: Request):
                 for msg in messages:
                     from_number = msg.get("from", "")
                     text = msg.get("text", {}).get("body", "")
-                    message_id = msg.get("msg_id", "")
+                    _ = msg.get("msg_id", "")
 
                     if not from_number or not text:
                         continue

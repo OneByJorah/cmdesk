@@ -1,0 +1,9 @@
+.git
+.github
+.agents
+docs
+node_modules
+*.md
+.env
+.env.*
+!.env.example
