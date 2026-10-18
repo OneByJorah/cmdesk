@@ -16,14 +16,17 @@ const OUT = process.env.OUT_DIR || "docs/screenshots";
 const RECORD = process.env.RECORD === "1";
 
 // Edit this list per project: one entry per screen worth showing.
+// Absolute URLs in `path` override BASE (different host ports).
 const PAGES = [
-  { name: "dashboard", path: "/", waitFor: "#app-ready" },
+  { name: "dashboard", path: "/dashboard/", waitFor: ".header h1" },
+  { name: "widget-preview", path: "http://127.0.0.1:8484/", waitFor: "h1" },
 ];
 
 const FORBIDDEN = [
   { label: "private IPv4", re: /\b(?:10\.\d{1,3}|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3}\b/ },
   { label: "tailnet IPv4", re: /\b100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.\d{1,3}\.\d{1,3}\b/ },
-  { label: "email address", re: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i },
+  // Clearly-fake example.com/org/net addresses are allowed demo data.
+  { label: "email address", re: /[A-Z0-9._%+-]+@(?!example\.(?:com|org|net)\b)[A-Z0-9.-]+\.[A-Z]{2,}/i },
   { label: "school domain", re: /\bk12\.vi\b/i },
   ...(process.env.SCRUB_PATTERNS || "")
     .split(",")

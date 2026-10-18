@@ -21,7 +21,7 @@ from session_manager import SessionManager
 # ═══════════════════════════════════════════════════
 
 AGENT_MODE = os.getenv("AGENT_MODE", "helpdesk")
-AGENT_NAME = os.getenv("AGENT_NAME", "J1 Helpdesk Agent")
+AGENT_NAME = os.getenv("AGENT_NAME", "cmdesk Agent")
 LLM_API_BASE = os.getenv("LLM_API_BASE", "http://llama:8081/v1")
 LLM_MODEL = os.getenv("LLM_MODEL", "qwen2.5-7b-instruct")
 CHROMA_URL = os.getenv("CHROMA_URL", "http://chroma:8000")
@@ -122,6 +122,11 @@ async def health():
         version="1.0.0",
         timestamp=time.time(),
     )
+
+
+@app.get("/healthz", response_model=HealthResponse, include_in_schema=False)
+async def healthz():
+    return await health()
 
 
 @app.post("/chat", response_model=ChatResponse)

@@ -3,7 +3,7 @@
 # ═══════════════════════════════════════════════════
 
 agent:
-  name: "J1 Helpdesk Agent"
+  name: "cmdesk Agent"
   mode: helpdesk
   port: 8080
   description: "Self-hosted AI helpdesk agent for customer support"

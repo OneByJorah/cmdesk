@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 import time
 import os
 
-SCREENSHOT_DIR = "/home/j1coder/github-repos/CommandDesk/docs/screenshots"
+SCREENSHOT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs", "screenshots")
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
 # Dashboard mockup
@@ -12,7 +12,7 @@ DASHBOARD_HTML = r"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CommandDesk - AI Helpdesk Dashboard</title>
+    <title>cmdesk - AI Helpdesk Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,7 +50,7 @@ DASHBOARD_HTML = r"""
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">🎧 CommandDesk</div>
+        <div class="logo">🎧 cmdesk</div>
         <div class="nav-item active">📊 Dashboard</div>
         <div class="nav-item">🎫 Tickets</div>
         <div class="nav-item">🤖 AI Assistant</div>
@@ -124,7 +124,7 @@ AI_HTML = r"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CommandDesk - AI Assistant</title>
+    <title>cmdesk - AI Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -160,7 +160,7 @@ AI_HTML = r"""
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">🎧 CommandDesk</div>
+        <div class="logo">🎧 cmdesk</div>
         <div class="nav-item">📊 Dashboard</div>
         <div class="nav-item">🎫 Tickets</div>
         <div class="nav-item active">🤖 AI Assistant</div>
@@ -232,7 +232,7 @@ COSTS_HTML = r"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CommandDesk - Cost Analytics</title>
+    <title>cmdesk - Cost Analytics</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -273,7 +273,7 @@ COSTS_HTML = r"""
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">🎧 CommandDesk</div>
+        <div class="logo">🎧 cmdesk</div>
         <div class="nav-item">📊 Dashboard</div>
         <div class="nav-item">🎫 Tickets</div>
         <div class="nav-item">🤖 AI Assistant</div>
@@ -375,7 +375,7 @@ COSTS_HTML = r"""
 
 
 def capture_screenshots():
-    """Capture CommandDesk screenshots using HTML mockups.
+    """Capture cmdesk screenshots using HTML mockups.
 
     Note: These are representative mockups, not screenshots from the running application.
     """

@@ -1,6 +1,6 @@
 {
-  "name": "J1 Helpdesk Admin",
-  "short_name": "J1 Helpdesk",
+  "name": "cmdesk Admin",
+  "short_name": "cmdesk",
   "description": "AI Helpdesk Admin Dashboard",
   "start_url": "/",
   "display": "standalone",

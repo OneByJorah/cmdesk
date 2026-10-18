@@ -26,4 +26,4 @@ Thanks for taking the time to contribute! Every island in the JorahOne archipela
 
 ## Questions?
 
-Open a [Discussion](https://github.com/OneByJorah/OneByJorah/discussions) or reach out at info@jorahone.com.
+Open a [Discussion](https://github.com/OneByJorah/OneByJorah/discussions) or reach out at <info@jorahone.com>.

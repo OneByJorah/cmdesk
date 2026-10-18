@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-echo "=== Installing CommandDesk ==="
+echo "=== Installing cmdesk ==="
 
 if ! command -v docker &> /dev/null; then
     echo "Docker is required but not installed. Please install Docker first."
@@ -25,11 +25,11 @@ if [ ! -f .env ]; then
     fi
 fi
 
-echo "Building and starting CommandDesk on port 8080..."
+echo "Building and starting cmdesk on port 8080..."
 if docker compose version &> /dev/null; then
     docker compose up --build -d
 else
     docker-compose up --build -d
 fi
 
-echo "CommandDesk installed. Access: http://localhost:8080"
+echo "cmdesk installed. Access: http://localhost:8080"
