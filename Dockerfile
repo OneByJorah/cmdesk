@@ -8,9 +8,9 @@ WORKDIR /app
 
 # System deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    libpq-dev \
+    build-essential=12.12 \
+    curl=8.14.1-2+deb13u7 \
+    libpq-dev=17.11-0+deb13u1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Python deps
