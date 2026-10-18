@@ -1,0 +1,27 @@
+name: Screenshots
+
+# Manual or on push to main. Never on pull requests from forks.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# A push and a manual run can race on the same bot branch; keep one.
+concurrency:
+  group: screenshots-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  screenshots:
+    uses: ./.github/workflows/reusable-screenshots.yml
+    # To use your self-hosted runner (trusted events only):
+    # with:
+    #   runner: self-hosted
+    #   install-deps: false
