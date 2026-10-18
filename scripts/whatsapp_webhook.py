@@ -72,7 +72,7 @@ INTENT_PATTERNS = {
 
 RESPONSES = {
     "greeting": (
-        "👋 Welcome to J1 Support!\n\n"
+        "👋 Welcome to cmdesk Support!\n\n"
         "I can help you with:\n"
         "🎫 Check your existing tickets\n"
         "📝 Create a new ticket\n"
@@ -141,7 +141,7 @@ RESPONSES = {
         "Please wait a minute before trying again."
     ),
     "goodbye": (
-        "👋 Thanks for contacting J1 Support!\n\n"
+        "👋 Thanks for contacting cmdesk Support!\n\n"
         "If you need help again, just message us anytime.\n"
         "Have a great day! 🌟"
     ),
@@ -637,3 +637,10 @@ async def view_queue():
             "message": data.get("message", "")[:100],
         })
     return {"queue": queue, "total": len(queue)}
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    port = int(os.getenv("PORT", "9090"))
+    uvicorn.run(app, host="0.0.0.0", port=port)

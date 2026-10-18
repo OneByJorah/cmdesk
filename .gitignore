@@ -20,6 +20,9 @@ email-queue/
 .vscode/
 *.swp
 
+# Node (screenshot tooling)
+node_modules/
+
 # OS
 .DS_Store
 Thumbs.db

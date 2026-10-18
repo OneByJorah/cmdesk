@@ -1,14 +1,22 @@
-version: "3.9"
-
 services:
   # ═══════════════════════════════════════════════════
   # LLM Inference (llama.cpp with Qwen2.5-7B)
   # ═══════════════════════════════════════════════════
   llama:
-    image: ghcr.io/ggerganov/llama.cpp:server
+    image: ghcr.io/ggml-org/llama.cpp:server
     container_name: helpdesk-llama
+    # Idle (and stay healthy) until a GGUF model is provided in ./models.
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        if [ -f "$$LLAMA_ARG_MODEL" ]; then
+          echo "cmdesk: loading model $$LLAMA_ARG_MODEL"
+          exec /app/llama-server
+        fi
+        echo "cmdesk: no model at $$LLAMA_ARG_MODEL — LLM disabled, idling (see README)"
+        exec sleep infinity
     ports:
-      - "127.0.0.1:8081:8081"
+      - "127.0.0.1:${LLAMA_PORT:-8081}:8081"
     volumes:
       - ./models:/models:ro
     environment:
@@ -25,7 +33,7 @@ services:
           memory: 7G
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:8081/health"]
+      test: ["CMD-SHELL", "if [ ! -f /models/qwen2.5-7b-instruct-q4_k_m.gguf ]; then exit 0; fi; curl -f http://127.0.0.1:8081/health"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -37,12 +45,13 @@ services:
   # Helpdesk Agent (Hermes - restricted, no ticket creation)
   # ═══════════════════════════════════════════════════
   helpdesk-agent:
+    image: ghcr.io/onebyjorah/cmdesk
     build:
       context: .
       dockerfile: Dockerfile
     container_name: helpdesk-agent
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:${AGENT_PORT:-8080}:8080"
     volumes:
       - ./config:/app/config:ro
       - ./ticket_platforms:/app/ticket_platforms:ro
@@ -85,12 +94,14 @@ services:
   # Admin Agent (Hermes - full access, plug-in to main Hermes)
   # ═══════════════════════════════════════════════════
   admin-agent:
+    image: ghcr.io/onebyjorah/cmdesk
     build:
       context: .
       dockerfile: Dockerfile
     container_name: helpdesk-admin-agent
+    command: ["python", "-m", "uvicorn", "agent_server:app", "--host", "0.0.0.0", "--port", "8082", "--workers", "2"]
     ports:
-      - "127.0.0.1:8082:8082"
+      - "127.0.0.1:${ADMIN_AGENT_PORT:-8082}:8082"
     volumes:
       - ./config:/app/config:ro
       - ./ticket_platforms:/app/ticket_platforms:ro
@@ -161,7 +172,7 @@ services:
     image: searxng/searxng:latest
     container_name: helpdesk-searxng
     ports:
-      - "127.0.0.1:8888:8080"
+      - "127.0.0.1:${SEARXNG_HOST_PORT:-8888}:8080"
     volumes:
       - searxng-data:/etc/searxng
       - ./config/searxng-settings.yml:/etc/searxng/settings.yml:ro
@@ -174,7 +185,7 @@ services:
           memory: 1G
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://127.0.0.1:8888/search?q=test&format=json"]
+      test: ["CMD-SHELL", "wget -q -O /dev/null 'http://127.0.0.1:8080/search?q=test&format=json'"]
       interval: 60s
       timeout: 10s
       retries: 3
@@ -207,7 +218,7 @@ services:
           memory: 1G
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://127.0.0.1:5678/healthz"]
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:5678/healthz"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -375,6 +386,7 @@ services:
 # Health Monitor
 # ═══════════════════════════════════════════════════
   health-monitor:
+    image: ghcr.io/onebyjorah/cmdesk
     build:
       context: .
       dockerfile: Dockerfile
@@ -424,7 +436,7 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 127.0.0.0/16
+        - subnet: 172.31.0.0/16
 
 # ═══════════════════════════════════════════════════
 # Volumes

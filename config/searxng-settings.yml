@@ -1,5 +1,6 @@
-# SearXNG Configuration for Helpdesk Agent
-# Place at /etc/searxng/settings.yml inside container
+# SearXNG Configuration for cmdesk
+# Merged over the image defaults; mounted at /etc/searxng/settings.yml
+use_default_settings: true
 
 server:
   port: 8080
@@ -12,11 +13,10 @@ search:
   safe_search: 0
   autocomplete: ""
   default_lang: "en"
+  max_result_count: 20
   formats:
     - html
     - json
-    - csv
-    - rss
 
 ui:
   static_use_hash: false
@@ -29,38 +29,9 @@ ui:
 outgoing:
   request_timeout: 5.0
   max_request_timeout: 10.0
-  user_agent_suffix: "J1-Helpdesk-Agent"
+  user_agent_suffix: "cmdesk-agent"
   enable_http2: true
   pool_connections: 100
   pool_maxsize: 20
 
-# Limit results for API consumers + disable unnecessary features
-search:
-  max_result_count: 20
-
-# Disable unnecessary features for API-only use
-disabled_plugins:
-  - "Self Information"
-  - "Tracker URL remover"
-  - "Vim-like hotkeys"
-  - "Hostnames plugin"
-  - "Open Access DOI rewrite"
-  - "Tor check plugin"
-
-enabled_plugins:
-  - "Basic Calculator"
-  - "Hash plugin"
-  - "Self Information"
-  - "URL resolver"
-  - "Unit converter"
-
-# Rate limiting for API consumers
-limiter:
-  enabled: true
-  # 30 requests per minute per IP
-  botsearch:
-    max_request_cnt_per_minute: 30
-
-# Logging
-logging:
-  level: WARNING
+limiter: false
